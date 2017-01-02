@@ -69,7 +69,7 @@ class os_saman extends os_payment
 		$jinput = JFactory::getApplication()->input;
 		$resNum = $jinput->post->get('ResNum', '0', 'INT');
 		$trackingCode = $jinput->post->get('TRACENO', '0', 'INT');
-		$stateCode = $jinput->post->get('stateCode', '0', 'INT');
+		$stateCode = $jinput->post->get('stateCode', '1', 'INT');
 		
 		$refNum = $jinput->post->get('RefNum', 'empty', 'STRING');
 		if (checkHack::strip($refNum) != $refNum )
