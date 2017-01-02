@@ -68,10 +68,19 @@ class os_saman extends os_payment
 		//$mobile = $allData->telephone;
 		$jinput = JFactory::getApplication()->input;
 		$resNum = $jinput->post->get('ResNum', '0', 'INT');
-		$refNum = $jinput->post->get('RefNum', '', 'STRING');
-		$state = $jinput->post->get('State', '0', 'STRING');
 		$trackingCode = $jinput->post->get('TRACENO', '0', 'INT');
 		$stateCode = $jinput->post->get('stateCode', '0', 'INT');
+		
+		$refNum = $jinput->post->get('RefNum', 'empty', 'STRING');
+		if (checkHack::strip($refNum) != $refNum )
+			$refNum = "illegal";
+		$state = $jinput->post->get('State', 'empty', 'STRING');
+		if (checkHack::strip($state) != $state )
+			$state = "illegal";
+		$cardNumber = $jinput->post->get('SecurePan', 'empty', 'STRING'); 
+		if (checkHack::strip($cardNumber) != $cardNumber )
+			$cardNumber = "illegal";
+			
 		$price = $allData->total;	
 		$merchantId = $this->data['samanmerchantId'];
 
@@ -82,6 +91,7 @@ class os_saman extends os_payment
 			'state:'.$state.
 			'trackingCode:'.$trackingCode.
 			'stateCode:'.$stateCode.
+			'cardNumber:'.$cardNumber.
 			'OrderTime:'.time() 
 		);
 		if (
